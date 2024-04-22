@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, SafeAreaView, ImageBackground, KeyboardAvoidingView, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 //import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import RegisterCiudadado from '../NewCiudadano/Register';
 import { API_BASE_URL } from '../../constants/constantes';
 import axios from 'axios';
+import GlobalContext from '../../../GlobalContextProvider';
 
 const LogIn = ({route}) => {
 
     const [mostrarModalRegistrarUsuario, setMostrarModalRegistrarUsuario] = useState(false)
     const [usuario, setUsuario] = useState('')
     const [password, setPassword] = useState('')
-    //const []
-    const { setCiudadanoLogueado, setIsAuthenticated } = route.params
+    const { setCiudadanoLogueado, setIsAuthenticated } = useContext(GlobalContext)
 
     const ingresar = async() => {
         if([usuario, password].includes('')){
@@ -62,6 +62,7 @@ const LogIn = ({route}) => {
                 style={styles.textInputs}
                 value={password}
                 onChangeText={setPassword}
+                secureTextEntry={true}
             />
             </View>
             <Pressable

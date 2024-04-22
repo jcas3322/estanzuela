@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
   SafeAreaView,
   View,
@@ -12,6 +12,7 @@ import {
 import axios from 'axios'
 import { API_BASE_URL } from '../constants/constantes'
 import { Picker } from '@react-native-picker/picker'
+import GlobalContext from '../../GlobalContextProvider'
 
 const IngresarIncidentes = ({route}) => {
 
@@ -25,7 +26,7 @@ const IngresarIncidentes = ({route}) => {
   const [categoria, setCategoria] = useState([])
   const [categoriaId, setCategoriaId] = useState('')
 
-  const { ciudadanoLogueado } = route.params
+  const { ciudadanoLogueado, setIsAuthenticated } = useContext(GlobalContext)
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -41,19 +42,18 @@ const IngresarIncidentes = ({route}) => {
             });
         
             const statusCode = response.status
-/*
+
             if(statusCode === 403){
               Alert.alert('Su sesion ha caducado, loguese nuevamente')
               setIsAuthenticated(false)
               return
             }
-*/
+
             if (!response.ok) {
               throw new Error('Error interno');
             }
         
             const data = await response.json()
-            console.log('cantidad de impresion')
         setCategoria(data)
       }catch(e){
         console.log('Error', e)
@@ -134,8 +134,6 @@ const IngresarIncidentes = ({route}) => {
       setDescripcion('')
       setDireccion('')
       setReferenciaDeDireccion('')
-      setLatitud('')
-      SetLongitud('')
       setDocumentoA('')
       setDocumentoB('')
       devolverFoco()

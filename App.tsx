@@ -20,11 +20,14 @@ import {
 import Tabs from './src/components/Tabs.js/Tabs';
 import LogIn from './src/components/LogIn/LogIn';
 import { NavigationContainer } from '@react-navigation/native';
+import { GlobalContextProvider } from './GlobalContextProvider';
 
 const App = ():React.JSX.Element =>{
 
   return(
-    <Tabs />
+    <GlobalContextProvider>
+      <Tabs />
+    </GlobalContextProvider>
   )
 }
 

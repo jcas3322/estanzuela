@@ -162,7 +162,8 @@ const RegisterCiudadado = ({setModalVisible}) => {
               placeholderTextColor={'#666'}
               value={password}
               onChangeText={setPassword}
-            />
+              secureTextEntry={true}
+              />
           </View>
           <View style={styles.campos}>
             <Text style={styles.campoLabels}>Repita contraseña</Text>
@@ -173,7 +174,8 @@ const RegisterCiudadado = ({setModalVisible}) => {
               value={retypePassword}
               onChangeText={setTRetypePassword}
               maxLength={10}
-            />
+              secureTextEntry={true}
+              />
           </View>
           <TakenImages
             foto={foto}

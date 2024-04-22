@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -9,12 +9,13 @@ import StackPedidos from '../NavigationStacks/StackPedidos'
 import StackIncidentes from '../NavigationStacks/StackIncidentes'
 import StackVentaDiara from '../NavigationStacks/StackVentaDiara'
 import LogIn from '../LogIn/LogIn'
+import GlobalContext from '../../../GlobalContextProvider'
 
 const Tabs = () => {
     const tabs = createBottomTabNavigator()
     const Stack = createNativeStackNavigator()
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const { isAuthenticated, setIsAuthenticated } = useContext(GlobalContext)
     const [ciudadanoLogueado, setCiudadanoLogueado] = useState({})
 
     return (
@@ -51,10 +52,6 @@ const Tabs = () => {
                 <tabs.Screen
                     name='Incidentes'
                     component={StackIncidentes}
-                    initialParams={{
-                        ciudadanoLogueado: ciudadanoLogueado,
-                        setIsAuthenticated: setIsAuthenticated
-                    }}
                 />
                 <tabs.Screen name='Ventas' component={StackVentaDiara} />
             </tabs.Navigator>) : (
@@ -62,10 +59,6 @@ const Tabs = () => {
                     <Stack.Screen
                         name='LogIn'
                         component={LogIn}
-                        initialParams={{
-                            setCiudadanoLogueado: setCiudadanoLogueado,
-                            setIsAuthenticated: setIsAuthenticated
-                        }}
                     />
                 </Stack.Navigator>
             )}
